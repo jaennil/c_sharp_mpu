@@ -1,0 +1,14 @@
+/home/jaennil/dev/mobileCSharp/vedicSquare/bin/Debug/net9.0/vedicSquare
+/home/jaennil/dev/mobileCSharp/vedicSquare/bin/Debug/net9.0/vedicSquare.deps.json
+/home/jaennil/dev/mobileCSharp/vedicSquare/bin/Debug/net9.0/vedicSquare.runtimeconfig.json
+/home/jaennil/dev/mobileCSharp/vedicSquare/bin/Debug/net9.0/vedicSquare.dll
+/home/jaennil/dev/mobileCSharp/vedicSquare/bin/Debug/net9.0/vedicSquare.pdb
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.GeneratedMSBuildEditorConfig.editorconfig
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.AssemblyInfoInputs.cache
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.AssemblyInfo.cs
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.csproj.CoreCompileInputs.cache
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.dll
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/refint/vedicSquare.dll
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.pdb
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/vedicSquare.genruntimeconfig.cache
+/home/jaennil/dev/mobileCSharp/vedicSquare/obj/Debug/net9.0/ref/vedicSquare.dll
