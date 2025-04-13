@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SLAZgLXk1Jc=",
+  "dgSpecHash": "76lUno/fhQY=",
   "success": true,
-  "projectFilePath": "/home/jaennil/dev/mobileCSharp/paint/paint.csproj",
+  "projectFilePath": "/home/jaennil/dev/c_sharp_mpu/paint/paint.csproj",
   "expectedPackageFiles": [
     "/home/jaennil/.nuget/packages/avalonia/11.2.6/avalonia.11.2.6.nupkg.sha512",
     "/home/jaennil/.nuget/packages/avalonia.angle.windows.natives/2.1.22045.20230930/avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

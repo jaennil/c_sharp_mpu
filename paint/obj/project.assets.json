@@ -1436,11 +1436,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jaennil/dev/mobileCSharp/paint/paint.csproj",
+      "projectUniqueName": "/home/jaennil/dev/c_sharp_mpu/paint/paint.csproj",
       "projectName": "paint",
-      "projectPath": "/home/jaennil/dev/mobileCSharp/paint/paint.csproj",
+      "projectPath": "/home/jaennil/dev/c_sharp_mpu/paint/paint.csproj",
       "packagesPath": "/home/jaennil/.nuget/packages/",
-      "outputPath": "/home/jaennil/dev/mobileCSharp/paint/obj/",
+      "outputPath": "/home/jaennil/dev/c_sharp_mpu/paint/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/jaennil/.nuget/NuGet/NuGet.Config"
@@ -1449,6 +1449,7 @@
         "net9.0"
       ],
       "sources": {
+        "/home/jaennil/.nuget/NuGet/Avalonia.Controls.ColorPicker": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

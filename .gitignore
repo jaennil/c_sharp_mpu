@@ -1,0 +1,38 @@
+## General
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+*.ncrunchsolution
+*.ncrunchproject
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet
+.nuget/
+*.nupkg
+nuget.exe
+packages/
+
+## IDE specific
+.idea/
+*.swp
+*.swo
