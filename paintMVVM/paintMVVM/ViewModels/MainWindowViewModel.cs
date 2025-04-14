@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reactive;
 using Avalonia;
 using Avalonia.Controls;
@@ -13,59 +14,102 @@ namespace paintMVVM.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public ReactiveCommand<Unit, Unit> PencilButtonCommand { get; }
+    public ReactiveCommand<Unit, Unit> LineButtonCommand { get; }
+    public ReactiveCommand<Unit, Unit> ClearButtonCommand { get; }
+    public ReactiveCommand<PointerEventArgs, Unit> PointerPressedCommand { get; }
+    public ReactiveCommand<PointerEventArgs, Unit> PointerMovedCommand { get; }
+    public ReactiveCommand<PointerEventArgs, Unit> PointerReleasedCommand { get; }
+    public ReactiveCommand<PointerEventArgs, Unit> PointerLeaveCommand { get; }
     private bool _isDrawing;
     private Tool _currentTool = Tool.Pencil;
     private Point _startPoint;
     private Point _endPoint;
+    private Canvas _canvas;
+    private Color _currentColor = Colors.Black;
+
+    public Color CurrentColor
+    {
+        get => _currentColor;
+        set => this.RaiseAndSetIfChanged(ref _currentColor, value);
+    }
 
 
     public MainWindowViewModel()
     {
         PencilButtonCommand = ReactiveCommand.Create(PencilButtonClicked);
+        LineButtonCommand = ReactiveCommand.Create(LineButtonClicked);
+        ClearButtonCommand = ReactiveCommand.Create(ClearButtonClicked);
+        PointerPressedCommand = ReactiveCommand.Create<PointerEventArgs>(OnPointerPressed);
+        PointerMovedCommand = ReactiveCommand.Create<PointerEventArgs>(OnPointerMoved);
+        PointerReleasedCommand = ReactiveCommand.Create<PointerEventArgs>(OnPointerReleased);
+        PointerLeaveCommand = ReactiveCommand.Create<PointerEventArgs>(OnPointerLeave);
+    }
+
+    public void Initialize(Canvas canvas)
+    {
+        _canvas = canvas;
     }
     
-    private void OnPointerPressed(PointerPressedEventArgs e)
+    private void OnPointerPressed(PointerEventArgs e)
     {
-        Debug.Print("PointerPressed");
+        Debug.Print("PointerPressed", "isDrawing", _isDrawing);
         
         _isDrawing = true;
-        _startPoint = e.GetCurrentPoint(DrawingCanvas).Position;
+        _startPoint = e.GetCurrentPoint(_canvas).Position;
     }
 
     private void OnPointerMoved(PointerEventArgs e)
     {
-        Debug.Print("PointerMoved");
+        Debug.Print("PointerMoved", "isDrawing", _isDrawing);
         
-        if (!_isDrawing)
+        if (!_isDrawing || _canvas == null)
         {
             return;
         }
+        
+        var position = e.GetPosition(_canvas);
 
+        if (position.X < 0 || position.Y < 0 || position.X >= _canvas.Width || position.Y >= _canvas.Height)
+        {
+            return;
+        }
+        
         switch (_currentTool)
         {
             case Tool.Pencil:
                 var ellipse = new Ellipse
                 {
-                    Stroke = new SolidColorBrush(Colors.Black),
+                    Stroke = new SolidColorBrush(CurrentColor),
                     StrokeThickness = 3,
-                    Fill = new SolidColorBrush(Colors.Black),
+                    Fill = new SolidColorBrush(CurrentColor),
                     Width = 5,
                     Height = 5,
                 };
-                Canvas.SetLeft(ellipse, e.GetPosition(DrawingCanvas).X);
-                Canvas.SetTop(ellipse, e.GetPosition(DrawingCanvas).Y);
-                DrawingCanvas.Children.Add(ellipse);
+                Canvas.SetLeft(ellipse, position.X);
+                Canvas.SetTop(ellipse, position.Y);
+                _canvas.Children.Add(ellipse);
                 break;
         }
         
     }
 
-    private void OnPointerReleased(PointerReleasedEventArgs e)
+    private void OnPointerReleased(PointerEventArgs e)
     {
-        Debug.Print("PointerReleased");
+        Debug.Print("PointerReleased", "isDrawing", _isDrawing);
+
+        if (!_isDrawing || _canvas == null)
+        {
+            return;
+        }
         
         _isDrawing = false;
-        _endPoint = e.GetCurrentPoint(DrawingCanvas).Position;
+        
+        _endPoint = e.GetCurrentPoint(_canvas).Position;
+        
+        _endPoint = new Point(
+            Math.Clamp(_endPoint.X, 0, _canvas.Bounds.Width),
+            Math.Clamp(_endPoint.Y, 0, _canvas.Bounds.Height)
+        );
 
         switch (_currentTool)
         {
@@ -78,9 +122,17 @@ public class MainWindowViewModel : ViewModelBase
                     StrokeThickness = 3,
                 };
                 
-                DrawingCanvas.Children.Add(line);
+                _canvas.Children.Add(line);
                 break;
         }
+    }
+    
+    private void OnPointerLeave(PointerEventArgs e)
+    {
+        Debug.Print("PointerLeave");
+        
+        _isDrawing = false;
+        _endPoint = e.GetCurrentPoint(_canvas).Position;
     }
 
     private void PencilButtonClicked()
@@ -92,8 +144,15 @@ public class MainWindowViewModel : ViewModelBase
     
     private void LineButtonClicked()
     {
-        Debug.Print("PencilButtonClicked");
+        Debug.Print("LineButtonClicked");
         
-        _currentTool = Tool.Pencil;
+        _currentTool = Tool.Line;
+    }
+
+    private void ClearButtonClicked()
+    {
+        Debug.Print("ClearButtonClicked");
+
+        _canvas.Children.Clear();
     }
 }

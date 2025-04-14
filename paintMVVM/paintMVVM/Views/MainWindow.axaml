@@ -18,14 +18,27 @@
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 			<Button Command="{Binding PencilButtonCommand}">Pencil</Button>
-			<!--
-			<Button Click="OnLineButtonClick">Line</Button>
-			<ColorPicker Color="{CompiledBinding Color}"></ColorPicker>
-			<Button Click="OnClearButtonClick">Clear</Button>
-			-->
+			<Button Command="{Binding LineButtonCommand}">Line</Button>
+			<ColorPicker Color="{Binding CurrentColor}"></ColorPicker>
+			<Button Command="{Binding ClearButtonCommand}">Clear</Button>
 		</StackPanel>
 		<Border BorderBrush="Black" BorderThickness="1" Margin="5">
-			<Canvas x:Name="DrawingCanvas" Background="White" PointerPressed="OnPointerPressed" PointerMoved="OnPointerMoved" PointerReleased="OnPointerReleased"></Canvas>
+			<Canvas x:Name="DrawingCanvas" Background="White">
+				<Interaction.Behaviors>
+					<EventTriggerBehavior EventName="PointerPressed">
+						<InvokeCommandAction Command="{Binding PointerPressedCommand}" PassEventArgsToCommand="True"></InvokeCommandAction>
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="PointerMoved">
+						<InvokeCommandAction Command="{Binding PointerMovedCommand}" PassEventArgsToCommand="True"></InvokeCommandAction>
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="PointerReleased">
+						<InvokeCommandAction Command="{Binding PointerReleasedCommand}" PassEventArgsToCommand="True"></InvokeCommandAction>
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="PointerExited">
+						<InvokeCommandAction Command="{Binding PointerLeaveCommand}" PassEventArgsToCommand="True"></InvokeCommandAction>
+					</EventTriggerBehavior>
+				</Interaction.Behaviors>
+			</Canvas>        
 		</Border>
 	</DockPanel>
 

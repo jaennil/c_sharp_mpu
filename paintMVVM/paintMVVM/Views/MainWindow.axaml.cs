@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Media;
 using Avalonia.ReactiveUI;
 using paintMVVM.ViewModels;
 
@@ -7,15 +8,18 @@ namespace paintMVVM.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
+    
+    private MainWindowViewModel ViewModel => DataContext as MainWindowViewModel;
     public MainWindow()
     {
         InitializeComponent();
-        
-        ViewModel = new MainWindowViewModel();
-    }
 
-    private void DrawingCanvas_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        throw new System.NotImplementedException();
+        Loaded += (sender, e) =>
+        {
+            if (ViewModel != null)
+            {
+                ViewModel.Initialize(DrawingCanvas);
+            }
+        };
     }
 }
