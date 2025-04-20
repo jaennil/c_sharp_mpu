@@ -21,16 +21,25 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<PointerEventArgs, Unit> PointerReleasedCommand { get; }
     public ReactiveCommand<PointerEventArgs, Unit> PointerLeaveCommand { get; }
     private bool _isDrawing;
+    private int _currentThickness = 5;
     private Tool _currentTool = Tool.Pencil;
     private Point _startPoint;
     private Point _endPoint;
     private Canvas _canvas;
     private Color _currentColor = Colors.Black;
+    private Line _prevLine;
+    private Point? _prevPosition;
 
     public Color CurrentColor
     {
         get => _currentColor;
         set => this.RaiseAndSetIfChanged(ref _currentColor, value);
+    }
+    
+    public int CurrentThickness
+    {
+        get => _currentThickness;
+        set => this.RaiseAndSetIfChanged(ref _currentThickness, value);
     }
 
 
@@ -64,7 +73,13 @@ public class MainWindowViewModel : ViewModelBase
         
         if (!_isDrawing || _canvas == null)
         {
+            _prevPosition = null;
             return;
+        }
+        
+        if (_prevLine != null)
+        {
+            _canvas.Children.Remove(_prevLine);
         }
         
         var position = e.GetPosition(_canvas);
@@ -77,20 +92,33 @@ public class MainWindowViewModel : ViewModelBase
         switch (_currentTool)
         {
             case Tool.Pencil:
-                var ellipse = new Ellipse
+                if (_prevPosition == null)
                 {
+                    _prevPosition = position;
+                }
+                var l = new Line
+                {
+                    StartPoint = _prevPosition.Value,
+                    EndPoint = position,
                     Stroke = new SolidColorBrush(CurrentColor),
-                    StrokeThickness = 3,
-                    Fill = new SolidColorBrush(CurrentColor),
-                    Width = 5,
-                    Height = 5,
+                    StrokeThickness = CurrentThickness,
                 };
-                Canvas.SetLeft(ellipse, position.X);
-                Canvas.SetTop(ellipse, position.Y);
-                _canvas.Children.Add(ellipse);
+                _canvas.Children.Add(l);
+                break;
+            case Tool.Line:
+                var line = new Line
+                {
+                    StartPoint = _startPoint,
+                    EndPoint = position,
+                    Stroke = new SolidColorBrush(CurrentColor),
+                    StrokeThickness = CurrentThickness,
+                };
+                _prevLine = line;
+                _canvas.Children.Add(line);
                 break;
         }
-        
+
+        _prevPosition = position;
     }
 
     private void OnPointerReleased(PointerEventArgs e)
@@ -118,8 +146,8 @@ public class MainWindowViewModel : ViewModelBase
                 {
                     StartPoint = _startPoint,
                     EndPoint = _endPoint,
-                    Stroke = new SolidColorBrush(Colors.Black),
-                    StrokeThickness = 3,
+                    Stroke = new SolidColorBrush(CurrentColor),
+                    StrokeThickness = CurrentThickness,
                 };
                 
                 _canvas.Children.Add(line);

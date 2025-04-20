@@ -20,6 +20,10 @@
 			<Button Command="{Binding PencilButtonCommand}">Pencil</Button>
 			<Button Command="{Binding LineButtonCommand}">Line</Button>
 			<ColorPicker Color="{Binding CurrentColor}"></ColorPicker>
+			<StackPanel>
+				<TextBlock Text="{Binding #Slider.Value}" HorizontalAlignment="Center"/>
+				<Slider x:Name="Slider" Width="100" Minimum="2" Maximum="100" Value="{Binding CurrentThickness}" TickFrequency="1" IsSnapToTickEnabled="True"/>
+			</StackPanel>
 			<Button Command="{Binding ClearButtonCommand}">Clear</Button>
 		</StackPanel>
 		<Border BorderBrush="Black" BorderThickness="1" Margin="5">
