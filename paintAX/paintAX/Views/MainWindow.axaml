@@ -24,7 +24,15 @@
         </StackPanel>
         
         <Border BorderThickness="1" BorderBrush="Black" Margin="5">
-            <Canvas Background="Transparent"/>
+            <!--
+            <Image Source="{Binding Image}">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="PointerPressed">
+                        <InvokeCommandAction Command="{Binding PointerPressedCommand}" PassEventArgsToCommand="True"/>
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </Image>
+            -->
         </Border>
         
     </DockPanel>
