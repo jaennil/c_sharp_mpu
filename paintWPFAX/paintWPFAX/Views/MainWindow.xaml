@@ -6,10 +6,7 @@
         xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:paintWPFAX"
         mc:Ignorable="d"
-        Title="FIX ME" Height="450" Width="800">
-        <!--
         Title="{Binding WindowTitle}" Height="450" Width="800">
-        -->
 
         <!--
     <DockPanel>
@@ -39,6 +36,8 @@
 
     </DockPanel>
     -->
-    <skia:SKElement x:Name="DrawingSurface" PaintSurface="DrawingSurface_PaintSurface" MouseDown="DrawingSurface_MouseDown" MouseMove="DrawingSurface_MouseMove" MouseUp="DrawingSurface_MouseUp"/>
+    <Border BorderThickness="1" BorderBrush="Gray" Margin="5">
+        <skia:SKElement x:Name="DrawingSurface" PaintSurface="DrawingSurface_PaintSurface" MouseDown="DrawingSurface_MouseDown" MouseMove="DrawingSurface_MouseMove" MouseUp="DrawingSurface_MouseUp"/>
+    </Border>
 
 </Window>

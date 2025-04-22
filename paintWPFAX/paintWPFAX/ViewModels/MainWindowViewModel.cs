@@ -16,6 +16,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private DrawingDocument _document;
 
     public event PropertyChangedEventHandler PropertyChanged;
+    public string WindowTitle => $"{Document.DisplayName} - Paint";
 
     public ITool CurrentTool
     {

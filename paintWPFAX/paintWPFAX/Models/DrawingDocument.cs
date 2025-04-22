@@ -13,6 +13,8 @@ public class DrawingDocument
     public SKCanvas Canvas { get; private set; }
     public int Width { get; private set; }
     public int Height { get; private set; }
+    public string FilePath { get; private set; }
+    public string DisplayName => string.IsNullOrEmpty(FilePath) ? "Untitiled" : System.IO.Path.GetFileName(FilePath);
     public DrawingDocument(int w, int h)
     {
         Width = w;
