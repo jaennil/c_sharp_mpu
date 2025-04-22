@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paintWPFAX", "paintWPFAX\paintWPFAX.csproj", "{9C1AB835-CA54-4958-B7F6-AE53676D31F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C1AB835-CA54-4958-B7F6-AE53676D31F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1AB835-CA54-4958-B7F6-AE53676D31F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1AB835-CA54-4958-B7F6-AE53676D31F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1AB835-CA54-4958-B7F6-AE53676D31F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A0D0880-100E-4EAA-BA11-4E18CC670EC5}
+	EndGlobalSection
+EndGlobal
