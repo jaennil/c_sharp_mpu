@@ -9,15 +9,16 @@ using SkiaSharp;
 
 namespace paintWPFAX.Tools;
 
-public class PencilTool : ToolBase
+public class EraserTool : ToolBase
 {
     private bool _isDrawing;
     private SKPoint _lastPoint;
-    public override string Name => "Pencil";
-    public PencilTool(ToolSettings settings) : base(settings)
+    public EraserTool(ToolSettings settings) : base(settings)
     {
+        settings.StrokeColor = SKColors.White;
     }
 
+    public override string Name => "Eraser";
 
     public override void OnMouseDown(DrawingDocument document, SKPoint point, MouseButtonEventArgs e)
     {
@@ -25,9 +26,6 @@ public class PencilTool : ToolBase
         {
             _isDrawing = true;
             _lastPoint = point;
-
-            using var paint = GetPaint();
-            document.Canvas.DrawPoint(point, paint);
         }
     }
 

@@ -69,4 +69,50 @@ public partial class MainWindow : Window
         DrawingSurface.ReleaseMouseCapture();
         DrawingSurface.InvalidateVisual();
     }
+
+    private void PencilButton_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("PencilButton_Click");
+
+        // FIX ME
+        ViewModel.CurrentTool = ViewModel.PencilTool;
+    }
+
+    private void EraserButton_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("EraserButton_Click");
+
+        // FIX ME
+        ViewModel.CurrentTool = ViewModel.EraserTool;
+    }
+
+    private void LineButton_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("LineButton_Click");
+
+        // FIX ME
+        ViewModel.CurrentTool = ViewModel.LineTool;
+    }
+
+    private void ClearButton_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("ClearButton_Click");
+
+        ViewModel.Document.Clear();
+        DrawingSurface.InvalidateVisual();
+    }
+
+    private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("OpenMenuItem_Click");
+
+        ViewModel.OpenDocument();
+        DrawingSurface.InvalidateVisual();
+    }
+    private void SaveAsMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("SaveAsMenuItem_Click");
+
+        ViewModel.SaveDocumentAs();
+    }
 }

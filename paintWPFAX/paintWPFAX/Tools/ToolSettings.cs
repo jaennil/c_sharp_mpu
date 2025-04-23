@@ -14,7 +14,7 @@ public class ToolSettings
     public float StrokeWidth { get; set; } = 1f;
     public bool IsAntialias { get; set; } = false;
     public SKPaintStyle PaintStyle { get; set; } = SKPaintStyle.Stroke;
-    public SKStrokeCap StrokeCap { get; set; } = SKStrokeCap.Round;
+    public SKStrokeCap StrokeCap { get; set; } = SKStrokeCap.Square;
 
     public SKPaint CreatePaint()
     {
