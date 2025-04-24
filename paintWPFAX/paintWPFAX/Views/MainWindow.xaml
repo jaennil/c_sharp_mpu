@@ -36,26 +36,30 @@
         <StackPanel
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <ItemsControl
-                ItemsSource="{Binding Tools}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel
-                            DockPanel.Dock="Top"
-                            Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <RadioButton
-                            GroupName="Tools"
-                            Content="{Binding Name}"
-                            Click="ToolButton_Click"
-                            Loaded="ToolRadioButton_Loaded"
-                            Tag="{Binding}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Border
+                BorderThickness="1"
+                BorderBrush="Gray">
+                <ItemsControl
+                    ItemsSource="{Binding Tools}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                DockPanel.Dock="Top"
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton
+                                GroupName="Tools"
+                                Content="{Binding Name}"
+                                Click="ToolButton_Click"
+                                Loaded="ToolRadioButton_Loaded"
+                                Tag="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
             <Button
                 Content="Clear"
                 Click="ClearButton_Click" />

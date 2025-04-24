@@ -71,6 +71,8 @@ public class MainWindowViewModel : INotifyPropertyChanged
             new OvalTool(new ToolSettings()),
             new RectangleTool(new ToolSettings()),
             new RoundRectangleTool(new ToolSettings()),
+            new TextTool(new ToolSettings()),
+            new SelectionTool(new ToolSettings()),
         };
         CurrentTool = _tools[0];
     }

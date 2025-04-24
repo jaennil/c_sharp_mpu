@@ -15,6 +15,7 @@ public class ToolSettings
     public bool IsAntialias { get; set; } = false;
     public SKPaintStyle PaintStyle { get; set; } = SKPaintStyle.Stroke;
     public SKStrokeCap StrokeCap { get; set; } = SKStrokeCap.Round;
+    public SKPathEffect PathEffect { get; set; }
 
     public SKPaint CreatePaint()
     {
@@ -25,6 +26,7 @@ public class ToolSettings
             Style = PaintStyle,
             StrokeCap = StrokeCap,
             IsAntialias = IsAntialias,
+            PathEffect = PathEffect
         };
     }
 }
