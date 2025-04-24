@@ -11,7 +11,7 @@ namespace paintWPFAX.Tools;
 
 public abstract class ToolBase : ITool
 {
-    protected ToolSettings Settings { get; }
+    public ToolSettings Settings { get; }
     public abstract string Name { get; }
     
     protected ToolBase(ToolSettings settings)

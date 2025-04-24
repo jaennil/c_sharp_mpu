@@ -8,7 +8,7 @@
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:local="clr-namespace:paintWPFAX"
     mc:Ignorable="d"
-    Title="{Binding WindowTitle}"
+    Title="{Binding WindowTitle, Mode=TwoWay}"
     Height="450"
     Width="800">
 
@@ -17,12 +17,18 @@
         <Menu
             DockPanel.Dock="Top">
             <MenuItem
-                Header="Файл">
+                Header="_File">
                 <MenuItem
-                    Header="Открыть"
+                    Header="_New"
                     Click="OpenMenuItem_Click" />
                 <MenuItem
-                    Header="Сохранить как..."
+                    Header="_Open"
+                    Click="OpenMenuItem_Click" />
+                <MenuItem
+                    Header="_Save"
+                    Click="SaveMenuItem_Click" />
+                <MenuItem
+                    Header="_Save As..."
                     Click="SaveAsMenuItem_Click" />
             </MenuItem>
         </Menu>
@@ -30,40 +36,149 @@
         <StackPanel
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Button
-                Content="Pencil"
-                Click="PencilButton_Click" />
-            <Button
-                Content="Eraser"
-                Click="EraserButton_Click" />
-            <Button
-                Content="Line"
-                Click="LineButton_Click" />
+            <ItemsControl
+                ItemsSource="{Binding Tools}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            GroupName="Tools"
+                            Content="{Binding Name}"
+                            Click="ToolButton_Click"
+                            Loaded="ToolRadioButton_Loaded"
+                            Tag="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <Button
                 Content="Clear"
                 Click="ClearButton_Click" />
-            <!--
-            <Button Content="Select" Click="ButtonSelect_Click"/>
-            -->
         </StackPanel>
 
         <StackPanel
             DockPanel.Dock="Left"
             Orientation="Vertical">
             <colorpicker:PortableColorPicker
-                ColorState="{Binding ElementName=ColorPicker, Path=ColorState, Mode=TwoWay}" Width="40" Height="40"/>
+                SelectedColor="{Binding CurrentColor, Mode=TwoWay}"
+                Width="40"
+                Height="40" />
+            <Separator />
+            <TextBlock
+                Text="Stroke Width" />
+            <Slider
+                Name="Slider"
+                Orientation="Vertical"
+                Height="100"
+                Minimum="1"
+                Maximum="100"
+                Value="{Binding StrokeWidth}"
+                IsSnapToTickEnabled="True"
+                HorizontalAlignment="Center"
+                TickFrequency="1" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding Value, ElementName=Slider}" />
+            <Separator />
+            <CheckBox
+                Content="Antialias"
+                IsChecked="{Binding IsAntialias}" />
+            <Separator />
+            <TextBlock
+                Text="Stroke Cap" />
+            <ItemsControl
+                ItemsSource="{Binding SKStrokeCaps}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            GroupName="StrokeCap"
+                            Content="{Binding}"
+                            Click="StrokeCapButton_Click"
+                            Loaded="StrokeCapRadioButton_Loaded"
+                            Tag="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Separator />
+            <TextBlock
+                Text="Paint Style" />
+            <ItemsControl
+                ItemsSource="{Binding SKPaintStyles}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            GroupName="PaintStyle"
+                            Content="{Binding}"
+                            Click="PaintStyleButton_Click"
+                            Loaded="PaintStyleRadioButton_Loaded"
+                            Tag="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
+        <StackPanel
+            Orientation="Horizontal"
+            DockPanel.Dock="Bottom">
+            <TextBlock
+                Text="{Binding CurrentPoint, StringFormat=\{0\} px}" />
+            <Separator
+                Margin="5,0,5,0">
+                <Separator.LayoutTransform>
+                    <RotateTransform
+                        Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding
+                        StringFormat="{}{0}x{1}">
+                        <Binding
+                            Path="Document.Width" />
+                        <Binding
+                            Path="Document.Height" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
         <Border
             BorderThickness="1"
             BorderBrush="Gray"
             Margin="5">
-            <skia:SKElement
-                x:Name="DrawingSurface"
-                PaintSurface="DrawingSurface_PaintSurface"
-                MouseDown="DrawingSurface_MouseDown"
-                MouseMove="DrawingSurface_MouseMove"
-                MouseUp="DrawingSurface_MouseUp" />
+            <ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
+                <Grid
+                    Background="#000000">
+                    <skia:SKElement
+                        x:Name="DrawingSurface"
+                        Width="{Binding Document.Width}"
+                        Height="{Binding Document.Height}"
+                        PaintSurface="DrawingSurface_PaintSurface"
+                        MouseDown="DrawingSurface_MouseDown"
+                        MouseMove="DrawingSurface_MouseMove"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        MouseUp="DrawingSurface_MouseUp" />
+                </Grid>
+            </ScrollViewer>
         </Border>
 
     </DockPanel>
