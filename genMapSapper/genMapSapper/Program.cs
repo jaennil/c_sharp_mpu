@@ -93,8 +93,73 @@ void Print2DArray(string[,] a)
     }
 }
 
-var map = GenMapSapper(height: 10, width: 10, randomMinesAmount: 11, minesCoordinates: new []{(3, 3), (4, 4)}, firstMoveCoordinates: (1, 1));
-if (map != null)
+var map1 = GenMapSapper();
+if (map1 != null)
 {
-    Print2DArray(map);
+    Print2DArray(map1);
+}
+Console.WriteLine();
+
+var map2 = GenMapSapper(height: 5, width: 5, randomMinesAmount: 3);
+if (map2 != null)
+{
+    Print2DArray(map2);
+}
+Console.WriteLine();
+
+var map3 = GenMapSapper(
+    minesCoordinates: new[] {(1, 1), (2, 2), (3, 3)},
+    firstMoveCoordinates: (0, 0)
+);
+if (map3 != null)
+{
+    Print2DArray(map3);
+}
+Console.WriteLine();
+
+var map4 = GenMapSapper(
+    height: 8,
+    width: 8,
+    randomMinesAmount: 5,
+    minesCoordinates: new[] {(0, 0), (7, 7)},
+    firstMoveCoordinates: (4, 4)
+);
+if (map4 != null)
+{
+    Print2DArray(map4);
+}
+Console.WriteLine();
+
+var map5 = GenMapSapper(
+    height: 20,
+    width: 20,
+    randomMinesAmount: 50
+);
+if (map5 != null)
+{
+    Print2DArray(map5);
+}
+Console.WriteLine();
+
+var map6 = GenMapSapper(
+    height: 3,
+    width: 3,
+    randomMinesAmount: 10
+);
+if (map6 != null)
+{
+    Print2DArray(map6);
+}
+Console.WriteLine();
+
+var map7 = GenMapSapper(
+    height: 10,
+    width: 10,
+    randomMinesAmount: 11,
+    minesCoordinates: new[] {(3, 3), (4, 4)},
+    firstMoveCoordinates: (1, 1)
+);
+if (map7 != null)
+{
+    Print2DArray(map7);
 }
