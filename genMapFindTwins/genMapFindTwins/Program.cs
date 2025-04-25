@@ -1,6 +1,6 @@
 ﻿using System.Text.Unicode;
 
-char[,]? GenMapFindTwins(int height = 9, int width = 9, string symbols = "10", int mode = 2)
+char[,]? GenMapFindTwins(int width = 9, int height = 9, string symbols = "10", int mode = 2)
 {
     if (symbols.Length * mode > width * height)
     {
@@ -8,13 +8,13 @@ char[,]? GenMapFindTwins(int height = 9, int width = 9, string symbols = "10", i
         return null;
     }
     
-    var map = new char[height, width];
+    var map = new char[width, height];
     var rnd = new Random();
     var used = new List<(int, int)>();
 
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i < width; i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < height; j++)
         {
             map[i, j] = '-';
         }
@@ -57,4 +57,36 @@ var map = GenMapFindTwins();
 if (map != null)
 {
     Print2DArray(map);
+}
+Console.WriteLine();
+
+var map2 = GenMapFindTwins(height: 5, width: 10, symbols: "ABC", mode: 3);
+if (map2 != null)
+{
+    Print2DArray(map2);
+}
+Console.WriteLine();
+
+var map3 = GenMapFindTwins(height: 2, width: 2, symbols: "X", mode: 1);
+if (map3 != null)
+{
+    Print2DArray(map3);
+}
+Console.WriteLine();
+
+// Should error
+var map4 = GenMapFindTwins(height: 3, width: 3, symbols: "123", mode: 4);
+Console.WriteLine();
+
+var map5 = GenMapFindTwins(height: 4, width: 4, symbols: "♥♦", mode: 4);
+if (map5 != null)
+{
+    Print2DArray(map5);
+}
+Console.WriteLine();
+
+var map6 = GenMapFindTwins(height: 3, width: 3, symbols: "A", mode: 9);
+if (map6 != null)
+{
+    Print2DArray(map6);
 }
