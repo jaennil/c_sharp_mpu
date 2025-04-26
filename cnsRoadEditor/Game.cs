@@ -1,4 +1,6 @@
-﻿class Game
+﻿namespace cnsRoadEditor;
+
+class Game
 {
 	private Map _map;
 
@@ -21,23 +23,51 @@
 	{
 		while (true)
 		{
-			PromptRoadType();
+			var operation = PromptOperation();
+			switch (operation)
+			{
+				case Operation.Point:
+					var road = PromptRoadType();
+					int x = PromptUser("x coordinate");
+					int y = PromptUser("y coordinate");
+					_map.SetRoad(road, x, y);
+					break;
+				case Operation.PrintMap:
+					Console.WriteLine(_map);
+					break;
+				case Operation.SaveToFile:
+					break;
+			}
 		}
+	}
+
+	private Operation PromptOperation()
+	{
+		Console.WriteLine("Available operations:");
+		foreach (Operation op in Enum.GetValues(typeof(Operation)))
+		{
+			Console.WriteLine((int)op + ") " + op);
+		}
+
+		var operation = PromptUser("operation");
+		return (Operation)operation;
 	}
 
 	private Road PromptRoadType()
 	{
+		Console.WriteLine("Available roads:");
 		foreach(Road road in Enum.GetValues(typeof(Road)))
 		{
-			Console.WriteLine(road + ") " + road.GetView());
+			Console.WriteLine((int)road + ") " + road.GetView());
 		}
 
-		var road = PromptUser("Enter road type");
+		var roadUserInput = PromptUser("road type");
+		return (Road)roadUserInput;
 	}
 
 	private int PromptUser(string entity)
 	{
-		Console.WriteLine("Enter {0}:");
+		Console.WriteLine("Enter {0}:", entity);
 		Console.Write("> ");
 
 		string input = Console.ReadLine();

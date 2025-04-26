@@ -1,4 +1,6 @@
-﻿class Program
+﻿namespace cnsRoadEditor;
+
+class Program
 {
 	static void Main(string[] args)
 	{

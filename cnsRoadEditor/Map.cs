@@ -1,6 +1,8 @@
-﻿class Map
+﻿namespace cnsRoadEditor;
+
+class Map
 {
-	private char[,] _field;
+	private string[,] _field;
 	private int _width;
 	private int _height;
 
@@ -8,15 +10,15 @@
 	{
 		_width = width;
 		_height = height;
-		_field = new char[_width, _height];
-		FillField('o');
+		_field = new string[height, width];
+		FillField("o");
 	}
 
-	private void FillField(char c)
+	private void FillField(string c)
 	{
-		for (int i = 0; i < _width; i++)
+		for (int i = 0; i < _height; i++)
 		{
-			for (int j = 0; j < _height; j++)
+			for (int j = 0; j < _width; j++)
 			{
 				_field[i, j] = c;
 			}
@@ -27,9 +29,9 @@
 	{
 		string s = "";
 
-		for (int i = 0; i < _width; i++)
+		for (int i = 0; i < _height; i++)
 		{
-			for (int j = 0; j < _height; j++)
+			for (int j = 0; j < _width; j++)
 			{
 				s += _field[i, j];
 			}
@@ -42,6 +44,6 @@
 
 	public void SetRoad(Road road, int x, int y)
 	{
-		_field[x, y] = (char)road;
+		_field[y, x] = road.GetView();
 	}
 }
