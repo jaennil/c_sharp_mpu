@@ -2,7 +2,9 @@ namespace cnsRoadEditor;
 
 public enum Operation
 {
-	Point = 1,
-	PrintMap,
+	PrintMap = 1,
+	Point,
+	Line,
+	Clear,
 	SaveToFile,
 }

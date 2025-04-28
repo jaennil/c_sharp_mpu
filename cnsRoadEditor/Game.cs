@@ -14,8 +14,6 @@ class Game
 	{
 		var width = PromptUser("map width");
 		var height = PromptUser("map height");
-		Console.WriteLine(width);
-		Console.WriteLine(height);
 		_map = new Map(width, height);
 	}
 
@@ -24,18 +22,38 @@ class Game
 		while (true)
 		{
 			var operation = PromptOperation();
+			
 			switch (operation)
 			{
+				case Operation.PrintMap:
+					Console.WriteLine(_map);
+					break;
 				case Operation.Point:
 					var road = PromptRoadType();
 					int x = PromptUser("x coordinate");
 					int y = PromptUser("y coordinate");
-					_map.SetRoad(road, x, y);
+					var coordinate = new Point(x, y);
+					_map.SetRoad(road, coordinate);
 					break;
-				case Operation.PrintMap:
-					Console.WriteLine(_map);
+				case Operation.Line:
+					var startX = PromptUser("start x coordinate");
+					var startY = PromptUser("start y coordinate");
+					var endX = PromptUser("end x coordinate");
+					var endY = PromptUser("end y coordinate");
+					var startPoint = new Point(startX, startY);
+					var endPoint = new Point(endX, endY);
+					_map.DrawRoadLine(startPoint, endPoint);
+					break;
+				case Operation.Clear:
+					_map.Clear();
 					break;
 				case Operation.SaveToFile:
+					using (var sw = new StreamWriter("output.txt"))
+					{
+						sw.Write(_map.ToString());
+						sw.Flush();
+						sw.Close();
+					}
 					break;
 			}
 		}
@@ -76,7 +94,7 @@ class Game
 		if (Int32.TryParse(input, out intInput) == false)
 		{
 			Console.WriteLine("ERROR: {0} must be positive integer", entity);
-			PromptUser(entity);
+			return PromptUser(entity);
 		}
 
 		return intInput;
