@@ -31,4 +31,7 @@ public enum Road
 	
 	[View("\u2534")]
 	TopT,
+
+    [View("\u22c5")]
+    None,
 }

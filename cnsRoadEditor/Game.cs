@@ -30,8 +30,8 @@ class Game
 					break;
 				case Operation.Point:
 					var road = PromptRoadType();
-					int x = PromptUser("x coordinate");
-					int y = PromptUser("y coordinate");
+					var x = PromptUser("x coordinate");
+					var y = PromptUser("y coordinate");
 					var coordinate = new Point(x, y);
 					_map.SetRoad(road, coordinate);
 					break;
@@ -83,12 +83,17 @@ class Game
 		return (Road)roadUserInput;
 	}
 
-	private int PromptUser(string entity)
+	private int? PromptUser(string entity)
 	{
 		Console.WriteLine("Enter {0}:", entity);
 		Console.Write("> ");
 
 		string input = Console.ReadLine();
+
+        if (input == "")
+        {
+            return null;
+        }
 
 		int intInput;
 		if (Int32.TryParse(input, out intInput) == false)
