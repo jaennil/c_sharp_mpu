@@ -57,12 +57,12 @@ class Map
 		var minY = Math.Min(startPoint.Y, endPoint.Y);
 		var maxY = Math.Max(startPoint.Y, endPoint.Y);
 		
-		for (int x = minX; x < maxX; x++)
+		for (int x = minX; x <= maxX; x++)
 		{
 			_field[minY, x] = Road.Horizontal.GetView();
 		}
 		
-		for (int y = minY; y < maxY; y++)
+		for (int y = minY; y <= maxY; y++)
 		{
 			_field[y, maxX] = Road.Vertical.GetView();
 		}
