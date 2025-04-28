@@ -58,7 +58,7 @@ class Game
 		Console.WriteLine("Available roads:");
 		foreach(Road road in Enum.GetValues(typeof(Road)))
 		{
-			Console.WriteLine((int)road + ") " + road.GetView());
+			Console.WriteLine("{0}) {1} ({2})", (int)road, road, road.GetView());
 		}
 
 		var roadUserInput = PromptUser("road type");
