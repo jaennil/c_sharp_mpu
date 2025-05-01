@@ -8,29 +8,32 @@ public enum Road
 	[View("│")]
 	Vertical,
 	
-	[View("\u2510")]
+	[View("┐")]
 	RightTopCorner,
 	
-	[View("\u250c")]
+	[View("┌")]
 	LeftTopCorner,
 	
-	[View("\u2518")]
+	[View("┘")]
 	RightBottomCorner,
 	
-	[View("\u2514")]
+	[View("└")]
 	LeftBottomCorner,
 	
-	[View("\u251c")]
+	[View("├")]
 	LeftT,
 	
-	[View("\u2524")]
+	[View("┤")]
 	RightT,
 	
-	[View("\u252c")]
+	[View("┬")]
 	BottomT,
 	
-	[View("\u2534")]
+	[View("┴")]
 	TopT,
+
+    [View("┼")]
+    Cross,
 
     [View("\u22c5")]
     None,
