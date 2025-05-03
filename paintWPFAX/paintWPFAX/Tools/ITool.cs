@@ -13,6 +13,9 @@ namespace paintWPFAX.Tools
     {
         string Name { get; }
 
+        void OnActivated();
+        void OnDeactivated();
+
         void OnMouseDown(DrawingDocument document, SKPoint point, MouseButtonEventArgs e);
         void OnMouseMove(DrawingDocument document, SKPoint point, MouseEventArgs e);
         void OnMouseUp(DrawingDocument document, SKPoint point, MouseButtonEventArgs e);

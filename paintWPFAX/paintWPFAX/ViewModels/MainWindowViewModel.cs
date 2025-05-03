@@ -71,8 +71,9 @@ public class MainWindowViewModel : INotifyPropertyChanged
             new OvalTool(new ToolSettings()),
             new RectangleTool(new ToolSettings()),
             new RoundRectangleTool(new ToolSettings()),
+            // new PolygonTool(new ToolSettings()),
             new TextTool(new ToolSettings()),
-            new SelectionTool(new ToolSettings()),
+            new SelectionTool(new ToolSettings(), Document),
         };
         CurrentTool = _tools[0];
     }
@@ -142,7 +143,9 @@ public class MainWindowViewModel : INotifyPropertyChanged
         get => _currentTool;
         set
         {
+            _currentTool?.OnDeactivated();
             _currentTool = value;
+            _currentTool?.OnActivated();
             OnPropertyChanged(nameof(CurrentTool));
             OnPropertyChanged(nameof(CurrentColor));
             OnPropertyChanged(nameof(StrokeWidth));

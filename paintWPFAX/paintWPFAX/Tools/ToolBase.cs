@@ -19,6 +19,10 @@ public abstract class ToolBase : ITool
         Settings = settings;
     }
 
+    public virtual void OnActivated() { }
+
+    public virtual void OnDeactivated() { }
+
     public abstract void OnMouseDown(DrawingDocument document, SKPoint point, MouseButtonEventArgs e);
     public abstract void OnMouseMove(DrawingDocument document, SKPoint point, MouseEventArgs e);
     public abstract void OnMouseUp(DrawingDocument document, SKPoint point, MouseButtonEventArgs e);

@@ -20,7 +20,7 @@
                 Header="_File">
                 <MenuItem
                     Header="_New"
-                    Click="OpenMenuItem_Click" />
+                    Click="NewMenuItem_Click" />
                 <MenuItem
                     Header="_Open"
                     Click="OpenMenuItem_Click" />
@@ -170,7 +170,7 @@
                 HorizontalScrollBarVisibility="Auto"
                 VerticalScrollBarVisibility="Auto">
                 <Grid
-                    Background="#000000">
+                    Background="Gray">
                     <skia:SKElement
                         x:Name="DrawingSurface"
                         Width="{Binding Document.Width}"
