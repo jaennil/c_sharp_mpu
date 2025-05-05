@@ -1,55 +1,62 @@
 ﻿using System.ComponentModel;
 using Avalonia;
-using SkiaSharp;
+using Avalonia.Platform;
+using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection.Metadata;
+using cards.Models;
 
 namespace cards.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private SKBitmap _randomCard;
-    
-    public SKBitmap RandomCard
+    private readonly CardsDeck _deck;
+    private readonly Random _random = new Random();
+    private ObservableCollection<Card> _displayedCards = [];
+    private const int NumCardsToDisplay = 6;
+
+    public ObservableCollection<Card> DisplayedCards
     {
-        get => _randomCard;
+        get => _displayedCards;
         set
         {
-            _randomCard = value;
+            _displayedCards = value;
+            OnPropertyChanged();
         }
     }
-    
+
     public MainWindowViewModel()
     {
-        int cardWidth = 50;
-        int cardHeight = 100;
-        RandomCard = new SKBitmap(cardWidth, cardHeight);
-        using var spriteSheet = SKBitmap.Decode("cards2.png");
-        var sourceRect = new SKRectI(
-            0,
-            0,
-            cardWidth,
-            cardHeight
-        );
-        using var canvas = new SKCanvas(RandomCard);
-        canvas.DrawBitmap(spriteSheet, sourceRect, new SKRect(0, 0, cardWidth, cardHeight));
+        _deck = new CardsDeck("avares://cards/Assets/cards22.png");
+        DisplayedCards = new ObservableCollection<Card>();
+        GenerateRandomCards();
     }
 
-    
-    private void GetRandomCard()
+    private void GenerateRandomCards()
     {
-        using var spriteSheet = SKBitmap.Decode("/Assets/cards2.png");
-        int cardsPerRow = 13;
-        int cardsPerColumn = 4;
+        DisplayedCards.Clear();
+        var allCards = _deck.GetAllCards().OrderBy(x => _random.Next()).Take(NumCardsToDisplay).ToList();
 
-        for (int row = 0; row < cardsPerColumn; row++)
+        var centerX = 900;
+        var centerY = 400;
+        var fanAngle = 150;
+        double angleStep = fanAngle / (NumCardsToDisplay - 1);
+        double startAngle = -fanAngle/2;
+        for (int i = 0; i < NumCardsToDisplay; i++)
         {
-            for (int column = 0; column < cardsPerRow; column++)
-            {
-                using var cardBitmap = new SKBitmap(50, 150);
-
-                var sourceRect = new SKRectI(
-                    
-                );
-            }
+            var card = allCards[i];
+            
+            var angle = startAngle + angleStep * i;
+            
+            card.X = centerX;
+            card.Y = centerY;
+            card.Angle = angle;
+            card.ZIndex = i;
+            
+            DisplayedCards.Add(card);
         }
     }
 }

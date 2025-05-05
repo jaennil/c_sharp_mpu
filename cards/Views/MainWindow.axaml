@@ -3,18 +3,54 @@
         xmlns:vm="using:cards.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:cards.Models"
+        xmlns:converters="clr-namespace:cards.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="cards.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="cards">
+    
+    <Window.Resources>
+        <converters:DoubleMultiplierConverter x:Key="DoubleMultiplierConverter"></converters:DoubleMultiplierConverter>
+    </Window.Resources>
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <Image Source="{Binding RandomCard}" />
+    
+    <Grid x:Name="Grid">
+        <ItemsControl ItemsSource="{Binding DisplayedCards}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models:Card">
+                    <Canvas>
+                        <Image Source="{Binding Image}"
+                               Canvas.Left="{Binding X}"
+                               Canvas.Top="{Binding Y}"
+                               ZIndex="{Binding ZIndex}"
+                               Width="{Binding Width}"
+                               PointerPressed="InputElement_OnPointerPressed"
+                               PointerMoved="InputElement_OnPointerMoved"
+                               PointerReleased="InputElement_OnPointerReleased"
+                               Tag="{Binding}"
+                               Height="{Binding Height}">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                                    <RotateTransform 
+                                        Angle="{Binding Angle}"
+                                        CenterY="{Binding Height, Converter={StaticResource DoubleMultiplierConverter}, ConverterParameter=0.25}"
+                                        CenterX="0"
+                                        />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 
 </Window>
