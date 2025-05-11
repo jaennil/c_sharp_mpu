@@ -13,7 +13,8 @@ public class Cursor
 
     public Cursor(int width, int height)
     {
-        
+        _width = width;
+        _height = height;
     }
 
     public void Draw()
