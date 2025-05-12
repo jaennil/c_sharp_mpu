@@ -4,6 +4,5 @@ namespace ded;
 
 public interface IRenderer
 {
-    void Init();
-    void Run();
+    void Draw();
 }

@@ -4,7 +4,7 @@ using Raylib_cs;
 
 namespace ded.Render;
 
-public class RaylibRenderer : IRenderer
+public class RaylibRenderer : RendererBase
 {
     public void Init()
     {
@@ -24,7 +24,7 @@ public class RaylibRenderer : IRenderer
 
     private void Draw()
     {
-        DrawCursor();
+        DrawText();
     }
 
     public void Run()
