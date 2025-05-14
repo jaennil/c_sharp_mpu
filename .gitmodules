@@ -1,0 +1,3 @@
+[submodule "dedd"]
+	path = dedd
+	url = git@github.com:jaennil/ded
