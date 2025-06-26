@@ -1,0 +1,219 @@
+﻿<Window
+    x:Class="FastImageViewer.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Settings"
+    Height="350"
+    Width="450"
+    WindowStartupLocation="CenterOwner"
+    ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style
+            TargetType="GroupBox">
+            <Setter
+                Property="Margin"
+                Value="10" />
+            <Setter
+                Property="Padding"
+                Value="10" />
+        </Style>
+
+        <Style
+            TargetType="TextBox">
+            <Setter
+                Property="Width"
+                Value="80" />
+            <Setter
+                Property="Height"
+                Value="25" />
+            <Setter
+                Property="VerticalContentAlignment"
+                Value="Center" />
+        </Style>
+
+        <Style
+            TargetType="Button"
+            x:Key="SettingsButtonStyle">
+            <Setter
+                Property="Margin"
+                Value="5" />
+            <Setter
+                Property="Padding"
+                Value="15,8" />
+            <Setter
+                Property="MinWidth"
+                Value="80" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer
+            Grid.Row="0"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <GroupBox
+                    Header="Размер превью">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="Auto" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="Ширина:"
+                            VerticalAlignment="Center"
+                            Margin="0,5" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Name="TxtWidth"
+                            Margin="10,5"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="пикселей"
+                            VerticalAlignment="Center"
+                            Margin="5" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="Высота:"
+                            VerticalAlignment="Center"
+                            Margin="0,5" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Name="TxtHeight"
+                            Margin="10,5"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Text="пикселей"
+                            VerticalAlignment="Center"
+                            Margin="5" />
+
+                        <StackPanel
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Orientation="Horizontal"
+                            Margin="0,10,0,0">
+                            <Button
+                                Content="150x150"
+                                Click="BtnPreset_Click"
+                                Tag="150,150"
+                                Style="{StaticResource SettingsButtonStyle}" />
+                            <Button
+                                Content="200x200"
+                                Click="BtnPreset_Click"
+                                Tag="200,200"
+                                Style="{StaticResource SettingsButtonStyle}" />
+                            <Button
+                                Content="256x256"
+                                Click="BtnPreset_Click"
+                                Tag="256,256"
+                                Style="{StaticResource SettingsButtonStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox
+                    Header="Кеш">
+                    <StackPanel>
+                        <CheckBox
+                            Name="ChkRememberFolder"
+                            Content="Запоминать последнюю открытую папку"
+                            Margin="0,5" />
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Margin="0,10">
+                            <TextBlock
+                                Text="Максимум изображений в памяти:"
+                                VerticalAlignment="Center" />
+                            <TextBox
+                                Name="TxtMemoryCache"
+                                Width="60"
+                                Margin="10,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox
+                    Header="Информация о кеше">
+                    <StackPanel>
+                        <TextBlock
+                            Name="TxtCacheInfo"
+                            Text="Загрузка..."
+                            Margin="0,5" />
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Margin="0,10">
+                            <Button
+                                Name="BtnOpenCacheFolder"
+                                Content="Открыть папку кеша"
+                                Click="BtnOpenCacheFolder_Click"
+                                Style="{StaticResource SettingsButtonStyle}" />
+                            <Button
+                                Name="BtnClearCacheSettings"
+                                Content="Очистить кеш"
+                                Click="BtnClearCacheSettings_Click"
+                                Style="{StaticResource SettingsButtonStyle}"
+                                Background="#F44336"
+                                Foreground="White" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопки -->
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Background="#F5F5F5"
+            Margin="0,10,0,0"
+            Height="50">
+            <Button
+                Name="BtnOK"
+                Content="OK"
+                IsDefault="True"
+                Click="BtnOK_Click"
+                Style="{StaticResource SettingsButtonStyle}"
+                Background="#4CAF50"
+                Foreground="White"
+                Margin="10" />
+            <Button
+                Name="BtnCancel"
+                Content="Отмена"
+                IsCancel="True"
+                Click="BtnCancel_Click"
+                Style="{StaticResource SettingsButtonStyle}"
+                Margin="10" />
+        </StackPanel>
+    </Grid>
+</Window>

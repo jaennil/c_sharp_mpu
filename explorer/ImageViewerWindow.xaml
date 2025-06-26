@@ -1,0 +1,165 @@
+﻿<Window
+    x:Class="FastImageViewer.ImageViewerWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Просмотр изображения"
+    Height="600"
+    Width="800"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized">
+
+    <Window.InputBindings>
+        <KeyBinding
+            Key="Escape"
+            Command="{Binding CloseCommand}" />
+        <KeyBinding
+            Key="F11"
+            Command="{Binding ToggleFullScreenCommand}" />
+        <KeyBinding
+            Key="Left"
+            Command="{Binding PreviousImageCommand}" />
+        <KeyBinding
+            Key="Right"
+            Command="{Binding NextImageCommand}" />
+        <KeyBinding
+            Key="Plus"
+            Command="{Binding ZoomInCommand}" />
+        <KeyBinding
+            Key="Minus"
+            Command="{Binding ZoomOutCommand}" />
+        <KeyBinding
+            Key="D0"
+            Command="{Binding ResetZoomCommand}" />
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <Style
+            TargetType="Button"
+            x:Key="ViewerButtonStyle">
+            <Setter
+                Property="Background"
+                Value="Transparent" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+            <Setter
+                Property="Foreground"
+                Value="White" />
+            <Setter
+                Property="Padding"
+                Value="10,5" />
+            <Setter
+                Property="Margin"
+                Value="2" />
+            <Setter
+                Property="Cursor"
+                Value="Hand" />
+            <Style.Triggers>
+                <Trigger
+                    Property="IsMouseOver"
+                    Value="True">
+                    <Setter
+                        Property="Background"
+                        Value="#555555" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid
+        Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Панель инструментов -->
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Horizontal"
+            Background="#333333"
+            Name="ToolbarPanel">
+            <Button
+                Content="◀"
+                Name="BtnPrevious"
+                Click="BtnPrevious_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Button
+                Content="▶"
+                Name="BtnNext"
+                Click="BtnNext_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Separator
+                Background="#555"
+                Margin="5" />
+            <!--
+            <Button
+                Content="🔍+"
+                Name="BtnZoomIn"
+                Click="BtnZoomIn_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Button
+                Content="🔍-"
+                Name="BtnZoomOut"
+                Click="BtnZoomOut_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Button
+                Content="1:1"
+                Name="BtnResetZoom"
+                Click="BtnResetZoom_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Button
+                Content="📐"
+                Name="BtnFitToWindow"
+                Click="BtnFitToWindow_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Separator
+                Background="#555"
+                Margin="5" />
+                -->
+            <Button
+                Content="🖼️"
+                Name="BtnFullScreen"
+                Click="BtnFullScreen_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+            <Button
+                Content="❌"
+                Name="BtnClose"
+                Click="BtnClose_Click"
+                Style="{StaticResource ViewerButtonStyle}" />
+        </StackPanel>
+
+        <!-- Область просмотра изображения -->
+        <ScrollViewer
+            Grid.Row="1"
+            Name="ImageScrollViewer"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            Background="Black">
+            <Image
+                Name="MainImage"
+                Stretch="None"
+                MouseLeftButtonDown="MainImage_MouseLeftButtonDown"
+                MouseMove="MainImage_MouseMove"
+                MouseLeftButtonUp="MainImage_MouseLeftButtonUp"
+                MouseWheel="MainImage_MouseWheel" />
+        </ScrollViewer>
+
+        <!-- Информационная панель -->
+        <StackPanel
+            Grid.Row="2"
+            Background="#333333"
+            Name="InfoPanel">
+            <TextBlock
+                Name="TxtImageInfo"
+                Foreground="White"
+                Margin="10,5"
+                FontSize="12"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </Grid>
+</Window>

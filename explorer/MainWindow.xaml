@@ -1,0 +1,185 @@
+﻿<Window
+    x:Class="FastImageViewer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Быстрый просмотрщик изображений"
+    Height="700"
+    Width="1000"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style
+            TargetType="Button"
+            x:Key="ToolbarButtonStyle">
+            <Setter
+                Property="Margin"
+                Value="5,2" />
+                <Setter
+                Property="Padding"
+                Value="10,5" />
+                <Setter
+                Property="Background"
+                Value="#2196F3" />
+                    <Setter
+                Property="Foreground"
+                Value="White" />
+                    <Setter
+                Property="BorderThickness"
+                Value="0" />
+                        <Setter
+                Property="Cursor"
+                Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger
+                    Property="IsMouseOver"
+                    Value="True">
+                                <Setter
+                        Property="Background"
+                        Value="#1976D2" />
+                            </Trigger>
+                        </Style.Triggers>
+        </Style>
+
+        <Style
+            TargetType="Border"
+            x:Key="ImageBorderStyle">
+            <Setter
+                Property="BorderBrush"
+                Value="#CCCCCC" />
+                <Setter
+                Property="BorderThickness"
+                Value="1" />
+                <Setter
+                Property="Margin"
+                Value="5" />
+                    <Setter
+                Property="Background"
+                Value="White" />
+                    <Setter
+                Property="CornerRadius"
+                Value="3" />
+                    <Style.Triggers>
+                        <Trigger
+                    Property="IsMouseOver"
+                    Value="True">
+                            <Setter
+                        Property="BorderBrush"
+                        Value="#2196F3" />
+                                <Setter
+                        Property="BorderThickness"
+                        Value="2" />
+                        </Trigger>
+                    </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+                <RowDefinition
+                Height="*" />
+                <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Horizontal"
+            Background="#F5F5F5"
+            Margin="0,0,0,5">
+            <Button
+                Name="BtnSelectFolder"
+                Content="📁 Выбрать папку"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnSelectFolder_Click" />
+                <Button
+                Name="BtnGoUp"
+                Content="⬆️ Назад"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnGoUp_Click" />
+                <Button
+                Name="BtnRefresh"
+                Content="🔄 Обновить"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnRefresh_Click" />
+                <Separator
+                Margin="10,5" />
+                    <Button
+                Name="BtnClearCache"
+                Content="🗑️ Очистить кеш"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnClearCache_Click" />
+                        <Button
+                Name="BtnBuildCache"
+                Content="⚡ Построить кеш"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnBuildCache_Click" />
+                        <Separator
+                Margin="10,5" />
+                            <Button
+                Name="BtnSettings"
+                Content="⚙️ Настройки"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Click="BtnSettings_Click" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            Background="#EEEEEE"
+            Margin="0,0,0,5">
+            <TextBlock
+                Name="TxtCurrentPath"
+                Text="Папка не выбрана"
+                Margin="10,5"
+                FontWeight="Bold" />
+            <TextBlock
+                Name="TxtImageCount"
+                Text=""
+                Margin="20,5,10,5" /> 
+            <TextBlock
+                Name="TxtCacheInfo"
+                Text=""
+                Margin="20,5,10,5"
+                Foreground="#666" />
+        </StackPanel>
+
+        
+        <ScrollViewer
+            Grid.Row="2"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+            <WrapPanel
+                Name="ImagePanel"
+                Orientation="Horizontal"
+                Margin="10" /> 
+        </ScrollViewer>
+
+        <StatusBar
+            Grid.Row="3">
+            <StatusBarItem>
+                <TextBlock
+                    Name="StatusText"
+                    Text="Готов" /> 
+            </StatusBarItem>
+            <StatusBarItem
+                HorizontalAlignment="Right">
+                <StackPanel
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Name="ProgressText"
+                        Text=""
+                        Margin="0,0,10,0" /> 
+                    <ProgressBar
+                        Name="ProgressBar"
+                        Width="200"
+                        Height="16"
+                        Visibility="Collapsed" /> 
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
